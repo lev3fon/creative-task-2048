@@ -1,0 +1,151 @@
+class Number {
+    function void draw0(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY, startX, startY + size);
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+        do Screen.drawLine(startX + size, startY, startX + size, startY + size);
+
+        return;
+    }
+
+    function void draw1(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX + (size / 2), startY + (size / 2), startX + size, startY);
+        do Screen.drawLine(startX + size, startY, startX + size, startY + size);
+
+        return;
+    }
+
+    function void draw2(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+
+        do Screen.drawLine(startX + size, startY, startX + size, startY + (size / 2));
+        do Screen.drawLine(startX, startY + (size / 2), startX, startY + size);
+
+        return;
+    }
+
+    function void draw3(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+        do Screen.drawLine(startX + size, startY, startX + size, startY + size);
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+
+        return;
+    }
+
+    function void draw4(int startX, int startY, int size) {
+        do Screen.setColor(true);
+        
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+        do Screen.drawLine(startX + size, startY, startX + size, startY + size);
+        do Screen.drawLine(startX, startY, startX, startY + (size / 2));
+
+        return;
+    }
+
+    function void draw5(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+
+        do Screen.drawLine(startX, startY, startX, startY + (size / 2));
+        do Screen.drawLine(startX + size, startY + (size / 2), startX + size, startY + size);
+
+        return;
+    }
+
+    function void draw6(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+
+        do Screen.drawLine(startX, startY, startX, startY + size);
+        do Screen.drawLine(startX + size, startY + (size / 2), startX + size, startY + size);
+
+        return;
+    }
+
+    //TODO: draw7
+
+    function void draw8(int startX, int startY, int size) {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(startX, startY, startX + size, startY);
+        do Screen.drawLine(startX, startY, startX, startY + size);
+        do Screen.drawLine(startX, startY + size, startX + size, startY + size);
+        do Screen.drawLine(startX + size, startY, startX + size, startY + size);
+        do Screen.drawLine(startX, startY + (size / 2), startX + size, startY + (size / 2));
+
+        return;
+    }
+
+    //TODO: draw9
+
+
+    function void draw(int startX, int startY, int size, int num) {
+        if (num = 2) {
+            do Number.draw2(startX, startY, size);
+        }
+        if (num = 4) {
+            do Number.draw4(startX, startY, size);
+        }
+        if (num = 8) {
+            do Number.draw8(startX, startY, size);
+        }
+        if (num = 16) {
+            do Number.draw1(startX, startY, size);
+            do Number.draw6(startX + size + 3, startY, size);
+        }
+        if (num = 32) {
+            do Number.draw3(startX, startY, size);
+            do Number.draw2(startX + size + 3, startY, size);
+        }
+        if (num = 64) {
+            do Number.draw6(startX, startY, size);
+            do Number.draw4(startX + size + 3, startY, size);
+        }
+        if (num = 128) {
+            do Number.draw1(startX, startY, size);
+            do Number.draw2(startX + size + 3, startY, size);
+            do Number.draw8(startX + (2 * size) + 5, startY, size);
+        }
+        if (num = 256) {
+            do Number.draw2(startX, startY, size);
+            do Number.draw5(startX + size + 3, startY, size);
+            do Number.draw6(startX + (2 * size) + 5, startY, size);
+        }
+        if (num = 512) {
+            do Number.draw5(startX, startY, size);
+            do Number.draw1(startX + size + 3, startY, size);
+            do Number.draw2(startX + (2 * size) + 5, startY, size);
+        }
+        if (num = 1024) {
+            do Number.draw1(startX, startY, size);
+            do Number.draw0(startX + size + 3, startY, size);
+            do Number.draw2(startX + (2 * size) + 5, startY, size);
+            do Number.draw4(startX + (3 * size) + 7, startY, size);
+        }
+        if (num = 2048) {
+            do Number.draw2(startX, startY, size);
+            do Number.draw0(startX + size + 3, startY, size);
+            do Number.draw4(startX + (2 * size) + 5, startY, size);
+            do Number.draw8(startX + (3 * size) + 7, startY, size);
+        }
+
+        return;
+    }
+}

@@ -1,0 +1,554 @@
+class Game {
+    field int startX;
+    field int startY;
+    field int cellSize;
+    field Cell cell00, cell01, cell02, cell03, cell10, cell11, cell12, cell13, cell20, cell21, cell22, cell23, cell30, cell31, cell32, cell33;
+    //field Array fieldCells;
+    //field Array firstColumn;
+    //field Array secondColumn;
+    //field Array thridColumn;
+    //field Array fourthColumn; 
+
+    constructor Game new() {
+        var int x;
+        var int y;
+        var int i;
+        var int j;
+
+        let startX = 4;
+        let startY = 4;
+        let cellSize = 48;
+        //let fieldCells = Array.new(4);
+        //let fieldCells[0] = Array.new(4);
+        //let fieldCells[1] = Array.new(4);
+        //let fieldCells[2] = Array.new(4);
+        //let fieldCells[3] = Array.new(4);
+
+        //let firstColumn = Array.new(4);
+        //let secondColumn = Array.new(4);
+        //let thridColumn = Array.new(4);
+        //let fourthColumn = Array.new(4);
+
+        let x = startX + 1;
+        let i = 0;
+
+        while(~(i = 4)) {
+            let y = startY + 1;
+            let j = 0;
+            while(~(j = 4)) {
+                //let fieldCells[i][j] = Cell.new(cellSize, x, y, 2); // не работает так =(
+                /*
+                if (i = 0) {
+                    let firstColumn[j] = Cell.new(cellSize, x, y, 2);
+                }
+                if (i = 1) {
+                    let secondColumn[j] = Cell.new(cellSize, x, y, 2);
+                }
+                if (i = 2) {
+                    let thridColumn[j] = Cell.new(cellSize, x, y, 2);
+                }
+                if (i = 3) {
+                    let fourthColumn[j] = Cell.new(cellSize, x, y, 2);
+                }
+                */
+
+                if (i = 0) {
+                    if (j = 0) {
+                        let cell00 = Cell.new(cellSize, x, y, 2);
+                    }
+                    if (j = 1) {
+                        let cell01 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 2) {
+                        let cell02 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 3) {
+                        let cell03 = Cell.new(cellSize, x, y, 0);
+                    }
+                }
+
+                if (i = 1) {
+                    if (j = 0) {
+                        let cell10 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 1) {
+                        let cell11 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 2) {
+                        let cell12 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 3) {
+                        let cell13 = Cell.new(cellSize, x, y, 0);
+                    }
+                }
+
+                if (i = 2) {
+                    if (j = 0) {
+                        let cell20 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 1) {
+                        let cell21 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 2) {
+                        let cell22 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 3) {
+                        let cell23 = Cell.new(cellSize, x, y, 0);
+                    }
+                }
+
+                if (i = 3) {
+                    if (j = 0) {
+                        let cell30 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 1) {
+                        let cell31 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 2) {
+                        let cell32 = Cell.new(cellSize, x, y, 0);
+                    }
+                    if (j = 3) {
+                        let cell33 = Cell.new(cellSize, x, y, 0);
+                    }
+                }
+
+                let j = j + 1;
+                let y = y + cellSize + 3;
+            }
+
+            let i = i + 1;
+            let x = x + cellSize + 3;
+        }
+
+
+        return this;
+    }
+
+    /** рисуем линии */
+    method void drawRows() {
+        var int count;
+        var boolean isCountEven;
+        var int fiveCount;
+        var int x;
+        var int y;
+
+        let count = 1;
+        let isCountEven = false;
+        let fiveCount = 1;
+        let x = startX;
+        let y = startY;
+        do Screen.setColor(true);
+        
+        while (~(count > 32)) {
+            if (fiveCount = 9) {
+                let x = x + cellSize + 1 + 2;
+                let y = startY;
+                let fiveCount = 1;
+            }
+
+            if (isCountEven) {
+                do Screen.drawLine(x, y, x + cellSize + 1, y);
+                let y = y + 2;
+            } else {
+                do Screen.drawLine(x, y, x + cellSize + 1, y);
+                let y = y + cellSize + 1;
+            }
+
+
+            let count = count + 1;
+            let fiveCount = fiveCount + 1;
+            if (isCountEven) {
+                let isCountEven = false;
+            } else {
+                let isCountEven = true;
+            }
+        }
+
+        return;
+    }
+
+    /** рисуем столбики */
+    method void drawColumns() {
+        var int count;
+        var boolean isCountEven;
+        var int fiveCount;
+        var int x;
+        var int y;
+
+        let count = 1;
+        let isCountEven = false;
+        let fiveCount = 1;
+        let x = startX;
+        let y = startY;
+        do Screen.setColor(true);
+        
+        while (~(count > 32)) {
+            if (fiveCount = 9) {
+                let y = y + cellSize + 1 + 2;
+                let x = startX;
+                let fiveCount = 1;
+            }
+
+            if (isCountEven) {
+                do Screen.drawLine(x, y, x, y + cellSize + 1);
+                let x = x + 2;
+            } else {
+                do Screen.drawLine(x, y, x, y + cellSize + 1);
+                let x = x + cellSize + 1;
+            }
+
+
+            let count = count + 1;
+            let fiveCount = fiveCount + 1;
+            if (isCountEven) {
+                let isCountEven = false;
+            } else {
+                let isCountEven = true;
+            }
+        }
+
+        return;
+    }
+
+    method void drawField() {
+        do drawRows();
+        do drawColumns();
+        return;
+    }
+
+    method void generateCell() {
+        if (cell00.getValueCell() = 0) {
+            do cell00.setValueCell(2);
+            return;
+        }
+        if (cell01.getValueCell() = 0) {
+            do cell01.setValueCell(2);
+            return;
+        }
+        if (cell02.getValueCell() = 0) {
+            do cell02.setValueCell(2);
+            return;
+        }
+        if (cell02.getValueCell() = 0) {
+            do cell02.setValueCell(2);
+            return;
+        }
+        if (cell03.getValueCell() = 0) {
+            do cell03.setValueCell(2);
+            return;
+        }
+
+        if (cell10.getValueCell() = 0) {
+            do cell10.setValueCell(2);
+            return;
+        }
+        if (cell11.getValueCell() = 0) {
+            do cell11.setValueCell(2);
+            return;
+        }
+        if (cell12.getValueCell() = 0) {
+            do cell12.setValueCell(2);
+            return;
+        }
+        if (cell12.getValueCell() = 0) {
+            do cell12.setValueCell(2);
+            return;
+        }
+        if (cell13.getValueCell() = 0) {
+            do cell13.setValueCell(2);
+            return;
+        }
+
+        if (cell20.getValueCell() = 0) {
+            do cell20.setValueCell(2);
+            return;
+        }
+        if (cell21.getValueCell() = 0) {
+            do cell21.setValueCell(2);
+            return;
+        }
+        if (cell22.getValueCell() = 0) {
+            do cell22.setValueCell(2);
+            return;
+        }
+        if (cell22.getValueCell() = 0) {
+            do cell22.setValueCell(2);
+            return;
+        }
+        if (cell23.getValueCell() = 0) {
+            do cell23.setValueCell(2);
+            return;
+        }
+
+        if (cell30.getValueCell() = 0) {
+            do cell30.setValueCell(2);
+            return;
+        }
+        if (cell31.getValueCell() = 0) {
+            do cell31.setValueCell(2);
+            return;
+        }
+        if (cell32.getValueCell() = 0) {
+            do cell32.setValueCell(2);
+            return;
+        }
+        if (cell32.getValueCell() = 0) {
+            do cell32.setValueCell(2);
+            return;
+        }
+        if (cell33.getValueCell() = 0) {
+            do cell33.setValueCell(2);
+            return;
+        }
+
+        // ну считай проиграл =)
+        do Sys.error(500);
+        return;
+    }
+
+    method void drawCells() {
+        do cell00.drawValue();
+        do cell01.drawValue();
+        do cell02.drawValue();
+        do cell03.drawValue();
+
+        do cell10.drawValue();
+        do cell11.drawValue();
+        do cell12.drawValue();
+        do cell13.drawValue();
+
+        do cell20.drawValue();
+        do cell21.drawValue();
+        do cell22.drawValue();
+        do cell23.drawValue();
+
+        do cell30.drawValue();
+        do cell31.drawValue();
+        do cell32.drawValue();
+        do cell33.drawValue();
+
+        return;
+    }
+
+    method boolean moveCells(Cell firstCell, Cell secondCell, Cell thridCell, Cell fourthCell) {
+        var int firstVal;
+        var int secondVal;
+
+        let firstVal = thridCell.getValueCell();
+        let secondVal = fourthCell.getValueCell();
+
+        if ((firstVal = 0) & (secondVal > 0)) {
+            do thridCell.setValueCell(secondVal);
+            do fourthCell.setValueCell(0);
+            do moveCells(firstCell, secondCell, thridCell, fourthCell);
+            return true;
+        }
+
+        let firstVal = firstCell.getValueCell();
+        let secondVal = secondCell.getValueCell();
+        if ((firstVal = 0) & (secondVal > 0)) {
+            do firstCell.setValueCell(secondVal);
+            do secondCell.setValueCell(0);
+            do moveCells(firstCell, secondCell, thridCell, fourthCell);
+            return true;
+        }
+
+        let firstVal = secondCell.getValueCell();
+        let secondVal = thridCell.getValueCell();
+        if ((firstVal = 0) & (secondVal > 0)) {
+            do secondCell.setValueCell(secondVal);
+            do thridCell.setValueCell(0);
+            do moveCells(firstCell, secondCell, thridCell, fourthCell);
+            return true;
+        }
+
+        return false;
+    }
+
+    method int calculateCells(Cell firstCell, Cell secondCell, Cell thridCell, Cell fourthCell) {
+        var int operationCount;
+        var int firstVal;
+        var int secondVal;
+        let operationCount = 0;
+
+        let firstVal = firstCell.getValueCell();
+        let secondVal = secondCell.getValueCell();
+        if (~(firstVal = 0) & ~(secondVal = 0) & (firstVal = secondVal)) {
+            do firstCell.setValueCell(firstVal + secondVal);
+            do secondCell.setValueCell(0);
+            let operationCount = operationCount + 1;
+        }
+
+        let firstVal = thridCell.getValueCell();
+        let secondVal = fourthCell.getValueCell();
+        if (~(firstVal = 0) & ~(secondVal = 0) & (firstVal = secondVal)) {
+            do thridCell.setValueCell(firstVal + secondVal);
+            do fourthCell.setValueCell(0);
+            let operationCount = operationCount + 1;
+        }
+
+        let firstVal = secondCell.getValueCell();
+        let secondVal = thridCell.getValueCell();
+        if (~(firstVal = 0) & ~(secondVal = 0) & (firstVal = secondVal) & (operationCount = 0)) {
+            do secondCell.setValueCell(firstVal + secondVal);
+            do thridCell.setValueCell(0);
+            let operationCount = operationCount + 1;
+        }
+
+        return operationCount;
+    }
+
+    method boolean calcAndMoveCells(Cell firstCell, Cell secondCell, Cell thridCell, Cell fourthCell) {
+        var int operationCount;
+        var boolean isFirstMoved;
+        var boolean isSecondMoved;
+
+        let isFirstMoved = moveCells(firstCell, secondCell, thridCell, fourthCell);
+        let operationCount = calculateCells(firstCell, secondCell, thridCell, fourthCell);
+        let isSecondMoved = moveCells(firstCell, secondCell, thridCell, fourthCell);
+
+        return (operationCount > 0) | isFirstMoved | isSecondMoved;
+    }
+
+    method void up() {
+        var boolean isNeedGenerate0;
+        var boolean isNeedGenerate1;
+        var boolean isNeedGenerate2;
+        var boolean isNeedGenerate3;
+
+        let isNeedGenerate0 = calcAndMoveCells(cell00, cell01, cell02, cell03);
+        let isNeedGenerate1 = calcAndMoveCells(cell10, cell11, cell12, cell13);
+        let isNeedGenerate2 = calcAndMoveCells(cell20, cell21, cell22, cell23);
+        let isNeedGenerate3 = calcAndMoveCells(cell30, cell31, cell32, cell33);
+
+        if (isNeedGenerate0 | isNeedGenerate1 | isNeedGenerate2 | isNeedGenerate3) {
+            do generateCell();
+        }
+
+        return;
+    }
+
+    method void down() {
+        var boolean isNeedGenerate0;
+        var boolean isNeedGenerate1;
+        var boolean isNeedGenerate2;
+        var boolean isNeedGenerate3;
+
+        let isNeedGenerate0 = calcAndMoveCells(cell03, cell02, cell01, cell00);
+        let isNeedGenerate1 = calcAndMoveCells(cell13, cell12, cell11, cell10);
+        let isNeedGenerate2 = calcAndMoveCells(cell23, cell22, cell21, cell20);
+        let isNeedGenerate3 = calcAndMoveCells(cell33, cell32, cell31, cell30);
+
+        if (isNeedGenerate0 | isNeedGenerate1 | isNeedGenerate2 | isNeedGenerate3) {
+            do generateCell();
+        }
+
+        return;
+    }
+
+    method void left() {
+        var boolean isNeedGenerate0;
+        var boolean isNeedGenerate1;
+        var boolean isNeedGenerate2;
+        var boolean isNeedGenerate3;
+
+        let isNeedGenerate0 = calcAndMoveCells(cell00, cell10, cell20, cell30);
+        let isNeedGenerate1 = calcAndMoveCells(cell01, cell11, cell21, cell31);
+        let isNeedGenerate2 = calcAndMoveCells(cell02, cell12, cell22, cell32);
+        let isNeedGenerate3 = calcAndMoveCells(cell03, cell13, cell23, cell33);
+
+        if (isNeedGenerate0 | isNeedGenerate1 | isNeedGenerate2 | isNeedGenerate3) {
+            do generateCell();
+        }
+
+        return;
+    }
+
+    method void right() {
+        var boolean isNeedGenerate0;
+        var boolean isNeedGenerate1;
+        var boolean isNeedGenerate2;
+        var boolean isNeedGenerate3;
+
+        let isNeedGenerate0 = calcAndMoveCells(cell30, cell20, cell10, cell00);
+        let isNeedGenerate1 = calcAndMoveCells(cell31, cell21, cell11, cell01);
+        let isNeedGenerate2 = calcAndMoveCells(cell32, cell22, cell12, cell02);
+        let isNeedGenerate3 = calcAndMoveCells(cell33, cell23, cell13, cell03);
+
+        if (isNeedGenerate0 | isNeedGenerate1 | isNeedGenerate2 | isNeedGenerate3) {
+            do generateCell();
+        }
+
+        return;
+    }
+
+    method void run() {
+        var char key;
+        var char pressedKey;
+        var boolean exit;
+        let exit = false;
+
+        while (~exit) {
+            let pressedKey = Keyboard.keyPressed();
+
+            if (~(key = pressedKey)) {
+                let key = pressedKey;
+
+                if (key = 81) { // q key
+                    let exit = true; 
+                }
+                if (key = 131) { // up arrow
+                    do up(); 
+                    do drawCells();
+                }
+                if (key = 133) { // down arrow
+                    do down();
+                    do drawCells();
+                }
+                if (key = 130) { // left arrow 
+                    do left(); 
+                    do drawCells();
+                }
+                if (key = 132) { // right arrow
+                    do right();
+                    do drawCells();
+                }
+            }
+        }
+
+        return;
+    }
+
+    /*
+    method void drawTest() {
+        do Screen.setColor(true);
+        do Screen.drawLine(0, 0, 64, 64);
+        return;
+    }
+    */
+
+    method void dispose() {
+        do cell00.dispose();
+        do cell01.dispose();
+        do cell02.dispose();
+        do cell03.dispose();
+
+        do cell10.dispose();
+        do cell11.dispose();
+        do cell12.dispose();
+        do cell13.dispose();
+
+        do cell20.dispose();
+        do cell21.dispose();
+        do cell22.dispose();
+        do cell23.dispose();
+
+        do cell30.dispose();
+        do cell31.dispose();
+        do cell32.dispose();
+        do cell33.dispose();
+
+        do Memory.deAlloc(this);
+        return;
+    }
+}

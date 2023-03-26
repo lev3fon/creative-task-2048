@@ -1,0 +1,42 @@
+class Cell {
+    field int cellSize;
+    field int xStart;
+    field int yStart;
+    field int value;
+
+    constructor Cell new(int cellSizeIn, int xStartIn, int yStartIn, int valueIn) {
+        let cellSize = cellSizeIn - 1;
+        let xStart = xStartIn;
+        let yStart = yStartIn;
+        let value = valueIn;
+
+        do drawValue();
+        return this;
+    }
+
+    method void clear() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(xStart, yStart, xStart + cellSize, yStart + cellSize);
+        return;
+    }
+
+    method void drawValue() {
+        do clear();
+        do Number.draw(xStart + 1, yStart + 1, cellSize / 4 - 4, value);
+        return;
+    }
+
+    method int getValueCell() {
+        return value;
+    }
+
+    method void setValueCell(int newValue) {
+        let value = newValue;
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+}
